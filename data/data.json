@@ -1,12 +1,26 @@
-{
-    "name": "Ubuntu Server",
 
-    "cpu_load": "50%",
-    "cpu_temp": 63,
+    [
+        [
+            "Ubuntu Server",
+            "50%",
+            "54"
+        ],
 
-    "gpu_detected": true,
-    "gpu_load": "32%",
-    "gpu_temp": 45,
+        [
+            "Windows 11 Laptop",
+            "23%",
+            "32"
+        ],
 
-    "battery_status": "charging"
-}
+        [
+            "Arch Linux Laptop",
+            "78%",
+            "68"
+        ],
+
+        [
+            "Linux Mint Desktop",
+            "98%",
+            "87"
+        ]
+    ]
