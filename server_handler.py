@@ -2,19 +2,12 @@ from http.server import SimpleHTTPRequestHandler as handler
 from socketserver import TCPServer as server
 from sys import exit
 
+def start_server(port):
+    with server(("", port), handler) as httpd:
+        print(f"Serving at port {port}")
+        # Start the server and keep it running until you stop the script
+        httpd.serve_forever()
 
-PORT = 8080
 
-with server(("", PORT), handler) as httpd:
-    print(f"Serving at port {PORT}")
-    # Start the server and keep it running until you stop the script
-    httpd.serve_forever()
+start_server(8080)
 
-def stop_execution(user_input: str) -> None:
-    if (user_input.lower == "q" or user_input.lower == "quit" or user_input.lower =="exit"):
-        exit()
-    else:
-        return
-
-while (True):
-    stop_execution(input())

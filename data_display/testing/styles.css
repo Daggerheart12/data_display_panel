@@ -1,4 +1,8 @@
 /*Page-wide styles*/
+body
+{
+    background-color: black;
+}
 
 .card_container
 {
@@ -7,6 +11,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    
     
 }
 

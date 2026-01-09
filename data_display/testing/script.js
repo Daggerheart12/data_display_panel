@@ -6,9 +6,6 @@ window.setInterval(updateCardContent, 5000);
 
 //Do stuff at the start.
 window.onload = function() {   
-    //Not working? Something is wrong.
-    focus(document.getElementById("1"));
-    console.log(document.activeElement.id);
     updateCardContent();
 
     //Start the input handling.
@@ -53,20 +50,19 @@ function nextCard() {
 
 //With a new card selected, flip the card, and update the rest to unflip the last one.
 async function updateCardFocus(next_card_id) {   
-    
     if (document.getElementById(next_card_id) != null)
-        {
-            var card = document.getElementById(next_card_id);
-            replaceCardData(next_card_id, ["This card is focused", "The text has been replaced", "Dogs are the best"])
-            card.tabIndex = 0;
-            card.focus();
-        }
-        else {
-            console.error("The card with the ID ${next_card_id} does not exist.")
-        }
-        
+    {
+        var card = document.getElementById(next_card_id);
+        replaceCardData(next_card_id, ["This card is focused", "The text has been replaced", "Dogs are the best"])
+        card.tabIndex = 0;
+        card.focus();
+    }
+    else {
+        console.error("The card with the ID ${next_card_id} does not exist.")
+    }
+    
     //Refresh card data.
-    await updateCardContent()
+    await updateCardContent();
 }
 
 //Loop through all of the cards in the list, reset them all, and then flip the card that was selected. 
@@ -94,6 +90,19 @@ async function updateCardContent(selected_card) {
             replaceCardData(i, data[i]);
         }
     }    
+
+    //Cull old cards.
+    if (data.length < cards.length) {
+        console.log("Number of cards to have " + data.length);
+        console.log("Number of cards present "+ cards.length);
+        console.log("Number to delete " + (cards.length - data.length));
+        //There are more cards than data sections for cards.
+        //Count down from the number of card we have, to the number of cards we should have.
+
+        for (var i = data.length; i < cards.length; i++) {
+            document.getElementById(i).remove();
+        }
+    }
 }
 
 //Read from the data file.
@@ -121,6 +130,7 @@ function replaceCardData(card_id, data) {
     card.querySelector('p[id=name]').innerHTML = data[0];
     card.querySelector('p[id=cpu_load]').innerHTML = data[1];
     card.querySelector('p[id=cpu_temp]').innerHTML = data[2];
+    card.tabIndex = -1;
 }
 
 //Create a new card and populate it with the required elements.

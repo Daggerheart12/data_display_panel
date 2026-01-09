@@ -1,26 +1,12 @@
-
+[
     [
-        [
-            "Ubuntu Server",
-            "50%",
-            "54"
-        ],
-
-        [
-            "Windows 11 Laptop",
-            "23%",
-            "32"
-        ],
-
-        [
-            "Arch Linux Laptop",
-            "78%",
-            "68"
-        ],
-
-        [
-            "Linux Mint Desktop",
-            "98%",
-            "87"
-        ]
+        "Ubuntu Server",
+        "50%",
+        "28"
+    ],
+    [
+        "Windows 11 Laptop",
+        "24%",
+        "32"
     ]
+]
