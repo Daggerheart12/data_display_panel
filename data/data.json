@@ -1,12 +1,64 @@
-[
-    [
-        "Ubuntu Server",
-        "50%",
-        "78"
-    ],
-    [
-        "Windows 11 Laptop",
-        "24%",
-        "32"
-    ]
+[    
+    {
+        "device_name": "Test Device 0",
+        "uptime": "3 Days",
+
+        "battery_charge":  "56%",
+        "battery_status": "Charging",
+
+        "disk_space_used": "453GB",
+        "total_disk_space": "1TB",
+
+        "fan_speed": "3542 rpm",
+
+        "gpu_load": "68%",
+        "gpu_temp": "78",
+
+        "ram_load": "5.4GB",
+
+        "cpu_load": "45%",
+        "cpu_temp": "64"
+    },
+
+    {
+        "device_name": "Test Device 1",
+        "uptime": "3 Days",
+
+        "battery_charge":  "56%",
+        "battery_status": "Charging",
+
+        "disk_space_used": "453GB",
+        "total_disk_space": "1TB",
+
+        "fan_speed": "3542 rpm",
+
+        "gpu_load": "68%",
+        "gpu_temp": "78",
+
+        "ram_load": "5.4GB",
+
+        "cpu_load": "45%",
+        "cpu_temp": "64"
+    },
+
+    {
+        "device_name": "Test Device 2",
+        "uptime": "3 Days",
+
+        "battery_charge":  "56%",
+        "battery_status": "Charging",
+
+        "disk_space_used": "453GB",
+        "total_disk_space": "1TB",
+
+        "fan_speed": "3542 rpm",
+
+        "gpu_load": "68%",
+        "gpu_temp": "78",
+
+        "ram_load": "5.4GB",
+
+        "cpu_load": "45%",
+        "cpu_temp": "64"
+    }
 ]
