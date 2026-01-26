@@ -1,4 +1,4 @@
-The HTML page will on act as a framework, with the JSON data being put into it.
-
-There will be one json file per device. A Javascript file will be able to look through the data directory and create a new HTML card for each JSON entry.
-
+Collect all required data from windows systems - TODO
+Test collection script on non-windows systems - TODO
+Request system data from server - TODO
+merge requested data with master data set - TODO

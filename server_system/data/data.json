@@ -1,0 +1,17 @@
+[
+    {
+        "device_name": "Test Device 0",
+        "uptime": 400000,
+        "battery_charge": 75,
+        "battery_status": "Charging",
+        "disk_space_used": 60,
+        "total_disk_space": 956,
+        "fan_speed": 4380,
+        "gpu_load": 16,
+        "gpu_temp": 92,
+        "ram_load": 25,
+        "total_ram_space": 93,
+        "cpu_load": 89,
+        "cpu_temp": 68
+    }
+]

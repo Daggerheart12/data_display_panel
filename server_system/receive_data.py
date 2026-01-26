@@ -4,7 +4,7 @@ import json
 #Take data and aggregate it into a single file - data.json
 def data_handler():
     data = ""   
-    with open('data/data.json') as file:
+    with open('server_system/data/data.json') as file:
         data = json.load(file)
 
         data[0]["battery_charge"] = randint(1, 100)
@@ -18,9 +18,9 @@ def data_handler():
         data[0]["cpu_load"] = randint(1, 100)
         data[0]["cpu_temp"] = randint(35, 100)
 
-
+        print(data)
         
-    with open('data/data.json', 'w') as file:
+    with open('server_system/data/data.json', 'w') as file:
         json.dump(data, file, indent=4)
 
 

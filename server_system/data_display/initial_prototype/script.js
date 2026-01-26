@@ -4,7 +4,7 @@ window.setInterval(updatePage, 2000);
 
 //Constant document elements.
 const card_container = document.getElementById("card_container");
-const data_path = "http://localhost:8080/data/data.json";
+const data_path = "http://localhost:8080/server_system/data/data.json";
 
 const green = "1ac095";
 const yellow = "faac06";
@@ -65,7 +65,7 @@ var yellows = 0;
 var reds = 0;
 
 //Colour thresholds for icons that require average values.
-const average = {"yellow": 5, "red": 10};    
+const average = {"yellow": 8, "red": 12};    
 
 //Update the colours and HTML content of data cards based on provided data.
 function updateCardData(card_data) {
@@ -301,7 +301,8 @@ function getNewColour() {
 async function getJsonData() {
     //File path to data. This assumes that the server is hosting on port 8080, that could be a problem later.
     try {
-        const response = await fetch(data_path);
+        const response = await fetch("http://localhost:8080/server_system/data/data.json");
+        console.log(data_path);
         if (!response.ok) {
             throw new Error("${response.status}");
         }
