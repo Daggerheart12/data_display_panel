@@ -27,4 +27,4 @@ def receive_client_data():
 
 #Start API.
 def start_api_endpoint():
-    app.run(port=8081)
+    app.run(host="192.168.1.254", port=8081)

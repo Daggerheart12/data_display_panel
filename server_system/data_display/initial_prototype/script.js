@@ -4,7 +4,7 @@ window.setInterval(updatePage, 2000);
 
 //Constant document elements.
 const card_container = document.getElementById("card_container");
-const data_path = "http://localhost:8080/server_system/data/data.json";
+const data_path = "http://192.168.1.254:8080/server_system/data/data.json";
 
 
 
@@ -378,7 +378,7 @@ Sanitise data before it is used to update the UI.
 async function getJsonData() {
     //File path to data. This assumes that the server is hosting on port 8080, that could be a problem later.
     try {
-        const response = await fetch("http://localhost:8080/server_system/data/data.json");
+        const response = await fetch(data_path)
         if (!response.ok) {
             throw new Error("${response.status}");
         }
