@@ -1,6 +1,7 @@
 [
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "client_id": "74851312",
         "device_name": "74851312",
         "uptime": "Can't retrieve system uptime",
@@ -15,10 +16,19 @@
         "battery_status": "Battery Status",
         "disk_space_used": 923252695040,
 >>>>>>> Stashed changes
+=======
+        "client_id": "69320332",
+        "device_name": "69320332",
+        "uptime": "Can't retrieve system uptime",
+        "battery_charge": "Battery Charge",
+        "battery_status": "Battery Status",
+        "disk_space_used": 923252695040,
+>>>>>>> Stashed changes
         "total_disk_space": 1022844989440,
         "fan_speed": "Fan Speed",
         "gpu_load": "GPU Load",
         "gpu_temp": "GPU Temp",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         "ram_load": 18408996864,
         "total_ram_space": 34049220608,
@@ -39,6 +49,11 @@
         "ram_load": 18411487232,
         "total_ram_space": 34049220608,
         "cpu_load": 6.2,
+=======
+        "ram_load": 14759055360,
+        "total_ram_space": 34049220608,
+        "cpu_load": 6.4,
+>>>>>>> Stashed changes
 =======
         "ram_load": 14759055360,
         "total_ram_space": 34049220608,
