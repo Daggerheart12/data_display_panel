@@ -4,11 +4,17 @@ import requests
 from time import sleep
 
 class APIHandler():
-    def __init__(self):
-        self.bouncer_url = "http://localhost:8081/api/bouncer"
-        self.data_url = "http://localhost:8081/api/data"
+    def __init__(self, ip):
+        self.bouncer_url = self.create_bouncer_url(ip)
+        self.data_url = self.create_data_url(ip)
         self.id = None
         self.collector = self.create_new_collector()
+
+    def create_bouncer_url(self, ip):
+        return f"http://{ip}:8081/api/bouncer"
+    
+    def create_data_url(self, ip):
+        return f"http://{ip}:8081/api/data"
 
     def create_new_collector(self):
         while True:
@@ -44,7 +50,15 @@ class APIHandler():
             return None
         
 print("Creating new API handler")
-handler = APIHandler()
+
+while True:
+    print("Enter server IPv4 address")
+    ip = str(input())
+    
+    if ip != "":
+        break
+
+handler = APIHandler(ip)
 print(f"API handler created successfully -> {handler.id}")
 
 while True:
