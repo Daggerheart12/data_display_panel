@@ -8,8 +8,16 @@ The server uses a python backend for client data handling and HTTP request handl
 The browser is provided with HTML and CSS and Javascript to display the interface and update it with provided data.
 A JSON file is prepared in the backend and polled by the frontend to provide client data to be displayed.
 
-At present, the intention is for the server to detect relivant API endpoints on its local network, and requiest data from there. This isn't scalable, and will be revised into a better solution.
+The server hosts a couple of API endpoints:
+- /data
+- /bouncer
+
+Bouncer hands out an ID.
+
+Data receives data POSTed to it.
 
 ### Client System:
-The client runs a python script that collects system data such as CPU, GPU, and RAM load, disk usage, etc., formats it into JSON, and returns this data when requested. The client script hosts a Flask API endpoint that can be queried for the above data. There are no API safety systems presently implemented.
+The client runs a python script that collects system data such as CPU, GPU, and RAM load, disk usage, etc., and formats it into JSON. The client will request an ID on initialisation, and continuously POST data to the server /data endpoint every few seconds.
+
+The addresses for the server API endpoints are hard coded, and the data collector is full of functions returning default values.
 

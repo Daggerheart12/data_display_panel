@@ -310,11 +310,11 @@ function dataToColour(data, current_element) {
         case "cpu_data_field":      //data = [cpu_load, cpu_temp]
             if (data[0] == null || data[1] == null) { return white; }
             if (data[0] > system_load.red || data[1] > system_temp.red) { return red; }
-            if (data[0] > system_load.yellow || data[1] > system_temp.yellow) 
+            if (data[0] > system_load.yellow || data[1] > system_temp.yellow) { return yellow; }
             return green;
 
         default:
-            console.error("Returning default colour value.")
+            console.error(current_element)
             return white;
     }
     
@@ -449,8 +449,8 @@ function sanitiseJsonData(card_data) {
         //CPU temp. Int.
        card_data[i].cpu_temp = is_int(card_data[i].cpu_temp, []);
 
-       return card_data;
     }
+    return card_data;
 }
 
 //Return null if not an int, or an int within range.
