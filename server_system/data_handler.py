@@ -55,15 +55,16 @@ def update_existing_data(new_data):
     replacement_data :list= []    
     new_data_used :bool= False
 
-    for i in range(len(existing_data_string)):
-        client_id = existing_data_string[i].get("client_id")
-        
-        #If this client is in the client list, add this data to the new data string.
-        if client_id == new_data.get("client_id"):
-            new_data_used = True
-            replacement_data.append(new_data)
-        elif client_id in device_ids.keys():
-            replacement_data.append(existing_data_string[i])
+    if existing_data_string != None:
+        for i in range(len(existing_data_string)):
+            client_id = existing_data_string[i].get("client_id")
+            
+            #If this client is in the client list, add this data to the new data string.
+            if client_id == new_data.get("client_id"):
+                new_data_used = True
+                replacement_data.append(new_data)
+            elif client_id in device_ids.keys():
+                replacement_data.append(existing_data_string[i])
     
     
     #The client supplying this data is new, append the data to the end.
@@ -84,13 +85,15 @@ def get_time() -> str:
 
 #Read data from file.
 def get_existing_data(mode) -> str | None:
-    with open("server_system/data/data.json", "r") as file:
-        if mode == 0:
-            return json.loads(file.read())
+    try:
+        with open("server_system/data/data.json", "r") as file:
+            if mode == 0:
+                return json.loads(file.read())
 
-        if mode == 1:
-            return file.read()
-    return None
+            if mode == 1:
+                return file.read()
+    except:
+        return None
 
 #All devices need to be identified so their data can be recorded,
 #and updated. Cut process after 100 trys.
