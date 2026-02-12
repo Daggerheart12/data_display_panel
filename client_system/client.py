@@ -20,10 +20,10 @@ class APIHandler():
     ###
 
     def create_bouncer_url(self, ip):
-        return f"http://{ip}:8081/api/bouncer"
+        return f"http://{ip}/api/bouncer"
     
     def create_data_url(self, ip):
-        return f"http://{ip}:8081/api/data"
+        return f"http://{ip}/api/data"
     
     #Request a new ID from the server.
     #Request an ID until one is given, or the set number of attempts runs out.
@@ -88,19 +88,19 @@ def initialise_apihandler():
     ip_address :str= ""
     debug_mode :bool= False
 
-    while True:
-        print("Enter server IPv4 address")
-        user_input = str(input())
-        
-        if user_input != "":
-            ip_address = user_input
-            break
+    print("Enter server address and port (default localhost:8081)")
+    user_input = str(input())
+    
+    if user_input != "":
+        ip_address = user_input
+    else:
+        ip_address = 'localhost:8081'
 
     while True:
-        print("Initialise client in debug mode, y/n?")
+        print("Initialise client in debug mode, [Y/n]?")
         user_input = str(input())
         
-        if user_input == "y" or user_input == "yes":
+        if user_input == "" or user_input == "y" or user_input == "yes":
             debug_mode = True
             break
         elif user_input == "n" or user_input =="no":        
