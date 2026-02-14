@@ -1,0 +1,18 @@
+[
+    {
+        "client_id": "57921732",
+        "device_name": "57921732",
+        "uptime": "Can't retrieve system uptime",
+        "battery_charge": "Battery Charge",
+        "battery_status": "Battery Status",
+        "disk_space_used": 18042298368,
+        "total_disk_space": 84053143552,
+        "fan_speed": "Fan Speed",
+        "gpu_load": "GPU Load",
+        "gpu_temp": "GPU Temp",
+        "ram_load": 2805018624,
+        "total_ram_space": 4111872000,
+        "cpu_load": 20.2,
+        "cpu_temp": "CPU Temp"
+    }
+]

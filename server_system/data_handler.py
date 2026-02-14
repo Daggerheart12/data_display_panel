@@ -1,8 +1,10 @@
 from random import randint
 import time
 import json
+from os import getcwd as current_directory
 
 device_ids = {}
+data_file_path = current_directory() + "/server_system/data_display/web_ui/data.json"
 
 
 def handle_new_data(client_data) -> None:
@@ -35,8 +37,11 @@ def handle_new_data(client_data) -> None:
     #Filter through existing data. Replace existing data with new provided data.
     updated_data = update_existing_data(data)
 
-    with open("server_system/data/data.json", "w") as file:
+    
+    print("Writing data")
+    with open(data_file_path, "w") as file:
         file.write(json.dumps(updated_data, indent = 4))
+        print("Data written")
     
 
 #Remove old clients from the client dictionary to save space on the screen.
@@ -86,7 +91,7 @@ def get_time() -> str:
 #Read data from file.
 def get_existing_data(mode) -> str | None:
     try:
-        with open("server_system/data/data.json", "r") as file:
+        with open(data_file_path, "r") as file:
             if mode == 0:
                 return json.loads(file.read())
 
@@ -122,6 +127,9 @@ def verify_id(client_data) -> int | None:
 
 #Enter data into the server log.
 def add_to_log(text):
-    with open("server_system/server_log/log.txt", "a") as log:
-        log.write(str(text) + "\n") 
+    try:
+        with open("server_system/server_log/log.txt", "a") as log:
+            log.write(str(text) + "\n") 
+    except:
+        print(text)
 

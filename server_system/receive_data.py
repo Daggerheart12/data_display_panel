@@ -17,6 +17,8 @@ def return_new_device_id() -> int | None:
 def receive_client_data():
     new_data = request.get_json()
 
+    
+
     if new_data == None:
         return "Bad Request", 400
     
