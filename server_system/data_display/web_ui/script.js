@@ -4,7 +4,7 @@ window.setInterval(updatePage, 2000);
 
 //Constant document elements.
 const card_container = document.getElementById("card_container");
-const data_path = "http://localhost:8080/web_ui/data.json";
+const data_path = "http://" + location.host + "/web_ui/data.json";
 
 
 
