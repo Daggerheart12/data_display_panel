@@ -4,7 +4,7 @@ window.setInterval(updatePage, 2000);
 
 //Constant document elements.
 const card_container = document.getElementById("card_container");
-const data_path = "http://" + location.host + "/web_ui/data.json";
+const data_path = "http://localhost:8080/web_ui/data.json";
 
 
 
@@ -340,8 +340,8 @@ function dataToText(data, current_element) {
             return data[0];
 
         case "battery_data_field":  //data = [battery_charge, battery_status]
-            if (data[0] == null || data[1] == null) { return "Data not found" }
-            else if (data[1] == "Charging") {
+            if (data[0] == null && data[1] == null) { return "Data not found" }
+            else if (data[1] == true) {
                 return ("Battery - charging at " + data[0] + "%");
             }
             return ("Battery - draining at " + data[0] + "%");
@@ -382,8 +382,9 @@ async function getJsonData() {
         if (!response.ok) {
             throw new Error("${response.status}");
         }
-
-        return (await response.json());        
+        data = await response.json()
+        console.log(data)
+        return (data);        
     }
     //Catch should only be called when an error is caught, and isn't called. It needs a variable to represent the error.
     catch (error) {
@@ -394,6 +395,8 @@ async function getJsonData() {
 //Loop through all the data, and ensure that it is as expected.
 function sanitiseJsonData(card_data) {
     for (var i = 0; i < card_data.length; i++) {
+        console.log(card_data[i])
+
         //Device name. String.
         if (typeof card_data[i].device_name !== "string") {
             card_data[i].device_name = "Unknown Device"; 
@@ -406,7 +409,7 @@ function sanitiseJsonData(card_data) {
         card_data[i].battery_charge = is_int(card_data[i].battery_charge, [0, 100]);
         
         //Battery status. String.
-        if (typeof card_data[i].battery_status !== "string") {
+        if (typeof card_data[i].battery_status !== "boolean") {
             card_data[i].battery_status = null; 
         }
 

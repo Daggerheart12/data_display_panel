@@ -1,4 +1,4 @@
-from collect_system_data import DataCollector
+import collect_system_data
 from sys import exit as quit_application
 import requests
 from time import sleep
@@ -6,7 +6,7 @@ from time import sleep
 ###
 #### Start of class
 class APIHandler():
-    def __init__(self, ip :str, debug :bool):
+    def __init__(self, ip : str, debug : bool):
         self.debug_mode = debug
 
         self.bouncer_url = self.create_bouncer_url(ip)
@@ -52,7 +52,8 @@ class APIHandler():
 
     #Initialise a DataCollector, and return it for self.collector.
     def create_new_collector(self):
-        return DataCollector(self.id)
+        return collect_system_data.get_new_collector(self.id)
+        #return DataCollector(self.id)
 
 
     ###
