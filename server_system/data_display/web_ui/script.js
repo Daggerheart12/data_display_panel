@@ -59,8 +59,6 @@ function removeLastCards(current_number, required_number) {
 }
 
 
-
-
 //Update the colours and HTML content of data cards based on provided data.
 function updateCardData(card_data) {
     var data_cards = card_container.getElementsByClassName("data_card");
@@ -347,23 +345,23 @@ function dataToText(data, current_element) {
             return ("Battery - draining at " + data[0] + "%");
 
         case "storage_data_field":  //data = [disk_space_used, total_disk_space]
-            if (data[0] == null || data[1] == null) { return "Data not found" }
-            return ("Disk - using " + data[0] + "GB of " + data[1] + "GB");
+            if (data[0] == null && data[1] == null) { return "Data not found" }
+            return ("Disk - " + data[0] + "GB of " + data[1] + "GB");
 
         case "fan_data_field":      //data = [fan_speed]
             if (data[0] == null) { return "Data not found" }
             return ("Fan - " + data[0] + "RPM");
 
         case "gpu_data_field":      //data = [gpu_load, gpu_temp]
-            if (data[0] == null || data[1] == null) { return "Data not found" }
+            if (data[0] == null && data[1] == null) { return "Data not found" }
             return ("GPU - " + data[0] + "% at " + data[1] + " degrees")
 
         case "ram_data_field":      //data = [ram_load, total_ram_space]
-            if (data[0] == null || data[1] == null) { return "Data not found" }
-            return ("RAM - using " + data[0] + "GB of " + data[1] + "GB")
+            if (data[0] == null && data[1] == null) { return "Data not found" }
+            return ("RAM - " + data[0] + "GB of " + data[1] + "GB")
 
         case "cpu_data_field":      //data = [cpu_load, cpu_temp]
-            if (data[0] == null || data[1] == null) { return "Data not found" }
+            if (data[0] == null && data[1] == null) { return "Data not found" }
             return ("CPU - " + data[0] + "% at " + data[1] + " degrees")
     }
 }
@@ -383,7 +381,6 @@ async function getJsonData() {
             throw new Error("${response.status}");
         }
         data = await response.json()
-        console.log(data)
         return (data);        
     }
     //Catch should only be called when an error is caught, and isn't called. It needs a variable to represent the error.
@@ -395,7 +392,6 @@ async function getJsonData() {
 //Loop through all the data, and ensure that it is as expected.
 function sanitiseJsonData(card_data) {
     for (var i = 0; i < card_data.length; i++) {
-        console.log(card_data[i])
 
         //Device name. String.
         if (typeof card_data[i].device_name !== "string") {
@@ -416,13 +412,13 @@ function sanitiseJsonData(card_data) {
         //Disk space used. Int (bytes).
         card_data[i].disk_space_used = is_int(card_data[i].disk_space_used, []);
         if (card_data[i].disk_space_used != null) {
-            card_data[i].disk_space_used = Math.round(card_data[i].disk_space_used / 1000000000);
+            card_data[i].disk_space_used = (card_data[i].disk_space_used / 1000000000).toFixed(1);
         }
 
         //Disk space total. Int (bytes).
         card_data[i].total_disk_space = is_int(card_data[i].total_disk_space, []);
         if (card_data[i].total_disk_space != null) {
-            card_data[i].total_disk_space = Math.round(card_data[i].total_disk_space / 1000000000);
+            card_data[i].total_disk_space = (card_data[i].total_disk_space / 1000000000).toFixed(1);
         }
 
         //Fan speed. Int.
@@ -437,13 +433,13 @@ function sanitiseJsonData(card_data) {
         //RAM load. Int (bytes).
         card_data[i].ram_load = is_int(card_data[i].ram_load, []);
         if (card_data[i].ram_load != null) {
-            card_data[i].ram_load = Math.round(card_data[i].ram_load / 1000000000);
+            card_data[i].ram_load = (card_data[i].ram_load / 1000000000).toFixed(1);
         }
 
         //RAM space total. Int (bytes).
         card_data[i].total_ram_space = is_int(card_data[i].total_ram_space, []);
         if (card_data[i].total_ram_space != null) {
-            card_data[i].total_ram_space = Math.round(card_data[i].total_ram_space / 1000000000);
+            card_data[i].total_ram_space = (card_data[i].total_ram_space / 1000000000).toFixed(1);
         }
 
         //CPU load. Int.
@@ -461,7 +457,7 @@ function sanitiseJsonData(card_data) {
 function is_int(value, range) {
     if (Number.isInteger(value) == false) {
         if (typeof value === "number" && !isNaN(value)) {
-            value = Math.round(value);
+            value = value.toFixed(1); 
         }
         else {
             return null;
@@ -480,9 +476,8 @@ function is_int(value, range) {
 
 /*
 Store and return the HTML base of data cards. This function is called when a new card needs to be made.
+This function returns the internal HTML, the card div is handled when the new card is created.
 */
-
-//This function returns the internal HTML, the card div is handled when the new card is created.
 function getDefaultCardHtml() {
     return `
     <img src="../../ui_assets/inverted_assets/background.svg" style="background-color: 1ac095;" class="background_svg" id="background_svg" alt="Background">
