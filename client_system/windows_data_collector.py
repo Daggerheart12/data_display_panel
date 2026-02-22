@@ -39,7 +39,8 @@ class WindowsDataCollector():
 		self.debug_mode = debug
 		self.device_name = device_name
 
-		#Hardware sensor targets		#Hardware name target-word, sensor name.
+		#Hardware sensor targets
+		#Add new lists with the following content: ["Type (see existing)", "Harware Name", "Sensor Name"]
 		self.cpu_temp_targets = [
 			["c_temp", "Intel ", "Core Average"]	#Space after name to avoid needing to handle Intel graphics systems
 		]
@@ -209,10 +210,10 @@ class WindowsDataCollector():
 		"total_ram_space": ram_data[1],
 		"cpu_load": hardware_monitor_data[1],
 		"cpu_temp": hardware_monitor_data[0]
-	}
-
-		print(f"\n\n{data}\n\n")
+		}
+	
 		data = json_dumps(data)
+		self.print_if_debug(data)
 		return data
 
 	###

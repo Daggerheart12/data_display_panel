@@ -399,10 +399,10 @@ function sanitiseJsonData(card_data) {
         }
 
         //Device uptime. Int.
-        card_data[i].uptime = is_int(card_data[i].uptime, []);
+        card_data[i].uptime = handle_strings_and_numbers(card_data[i].uptime, []);
         
         //Battery charge. Int.
-        card_data[i].battery_charge = is_int(card_data[i].battery_charge, [0, 100]);
+        card_data[i].battery_charge = handle_strings_and_numbers(card_data[i].battery_charge, [0, 100]);
         
         //Battery status. String.
         if (typeof card_data[i].battery_status !== "boolean") {
@@ -410,43 +410,43 @@ function sanitiseJsonData(card_data) {
         }
 
         //Disk space used. Int (bytes).
-        card_data[i].disk_space_used = is_int(card_data[i].disk_space_used, []);
+        card_data[i].disk_space_used = handle_strings_and_numbers(card_data[i].disk_space_used, []);
         if (card_data[i].disk_space_used != null) {
             card_data[i].disk_space_used = (card_data[i].disk_space_used / 1000000000).toFixed(1);
         }
 
         //Disk space total. Int (bytes).
-        card_data[i].total_disk_space = is_int(card_data[i].total_disk_space, []);
+        card_data[i].total_disk_space = handle_strings_and_numbers(card_data[i].total_disk_space, []);
         if (card_data[i].total_disk_space != null) {
             card_data[i].total_disk_space = (card_data[i].total_disk_space / 1000000000).toFixed(1);
         }
 
         //Fan speed. Int.
-        card_data[i].fan_speed = is_int(card_data[i].fan_speed, []);
+        card_data[i].fan_speed = handle_strings_and_numbers(card_data[i].fan_speed, []);
 
         //GPU load. Int.
-        card_data[i].gpu_load = is_int(card_data[i].gpu_load, [0, 100])
+        card_data[i].gpu_load = handle_strings_and_numbers(card_data[i].gpu_load, [0, 100])
         
         //GPU Temp. Int.
-        card_data[i].gpu_temp = is_int(card_data[i].gpu_temp, [])
+        card_data[i].gpu_temp = handle_strings_and_numbers(card_data[i].gpu_temp, [])
 
         //RAM load. Int (bytes).
-        card_data[i].ram_load = is_int(card_data[i].ram_load, []);
+        card_data[i].ram_load = handle_strings_and_numbers(card_data[i].ram_load, []);
         if (card_data[i].ram_load != null) {
             card_data[i].ram_load = (card_data[i].ram_load / 1000000000).toFixed(1);
         }
 
         //RAM space total. Int (bytes).
-        card_data[i].total_ram_space = is_int(card_data[i].total_ram_space, []);
+        card_data[i].total_ram_space = handle_strings_and_numbers(card_data[i].total_ram_space, []);
         if (card_data[i].total_ram_space != null) {
             card_data[i].total_ram_space = (card_data[i].total_ram_space / 1000000000).toFixed(1);
         }
 
         //CPU load. Int.
-        card_data[i].cpu_load = is_int(card_data[i].cpu_load, [0, 100]);
+        card_data[i].cpu_load = handle_strings_and_numbers(card_data[i].cpu_load, [0, 100]);
 
         //CPU temp. Int.
-       card_data[i].cpu_temp = is_int(card_data[i].cpu_temp, []);
+       card_data[i].cpu_temp = handle_strings_and_numbers(card_data[i].cpu_temp, []);
 
     }
     return card_data;
@@ -454,13 +454,27 @@ function sanitiseJsonData(card_data) {
 
 //Return null if not an int, or an int within range.
 //If the value is a float, make it an int.
-function is_int(value, range) {
+function handle_strings_and_numbers(value, range) {
     if (Number.isInteger(value) == false) {
         if (typeof value === "number" && !isNaN(value)) {
             value = value.toFixed(1); 
         }
         else {
-            return null;
+            try
+            {
+                var temp = value    //Store the string. Only expected data type.
+                value = parseInt(value, 10)
+                value = value.toFixed(1)
+
+                if (value == "NaN"){
+                    return temp
+                }
+
+                return value
+            }
+            catch {
+                return value
+            }
         }
     }
     
