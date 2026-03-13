@@ -8,6 +8,7 @@ data_file_path = current_directory() + "/server_system/data_display/web_ui/data.
 
 
 def handle_new_data(client_data) -> None:
+    print("This is a test!!!")
     data = None
     try:
         data = json.loads(client_data)

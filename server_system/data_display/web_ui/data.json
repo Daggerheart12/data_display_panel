@@ -1,18 +1,34 @@
 [
     {
-        "client_id": "77486905",
+        "client_id": "46270838",
         "device_name": "LAPTOP-GKQ2V2HP",
         "uptime": "No Data",
-        "battery_charge": 94,
+        "battery_charge": 100,
         "battery_status": true,
-        "disk_space_used": 676066992128,
+        "disk_space_used": 754440351744,
         "total_disk_space": 1022844989440,
         "fan_speed": "Fan Speed",
         "gpu_load": "No Data",
-        "gpu_temp": "55.0",
-        "ram_load": 16403480576,
+        "gpu_temp": "49.0",
+        "ram_load": 16460652544,
         "total_ram_space": 34049220608,
-        "cpu_load": "11.720000267028809",
-        "cpu_temp": "65.5999984741211"
+        "cpu_load": "0.0",
+        "cpu_temp": "56.29999923706055"
+    },
+    {
+        "client_id": "32448695",
+        "device_name": "Bob's computaaaaa",
+        "uptime": "No Data",
+        "battery_charge": 100,
+        "battery_status": true,
+        "disk_space_used": 754440351744,
+        "total_disk_space": 1022844989440,
+        "fan_speed": "Fan Speed",
+        "gpu_load": "No Data",
+        "gpu_temp": "49.0",
+        "ram_load": 16440356864,
+        "total_ram_space": 34049220608,
+        "cpu_load": "0.0",
+        "cpu_temp": "56.70000076293945"
     }
 ]
