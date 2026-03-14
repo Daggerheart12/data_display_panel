@@ -2,7 +2,8 @@ from flask import Flask, request
 import requests
 import json
 
-from data_handler import *
+#from data_handler import *
+from mongo_data_handler import *
 
 
 app = Flask(__name__)
@@ -22,7 +23,8 @@ def receive_client_data():
     if new_data == None:
         return "Bad Request", 400
     
-    handle_new_data(new_data)
+    #handle_new_data(new_data)
+    update_client(json.loads(new_data))
     return "Data received", 200
 
 
