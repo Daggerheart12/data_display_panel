@@ -4,7 +4,7 @@ window.setInterval(updatePage, 2000);
 
 //Constant document elements.
 const card_container = document.getElementById("card_container");
-const data_path = "http://localhost:8080/web_ui/data.json";
+const data_path = "http://localhost:8080/api/data";
 
 
 
@@ -381,6 +381,7 @@ async function getJsonData() {
             throw new Error("${response.status}");
         }
         data = await response.json()
+        console.log(data)
         return (data);        
     }
     //Catch should only be called when an error is caught, and isn't called. It needs a variable to represent the error.
@@ -494,37 +495,37 @@ This function returns the internal HTML, the card div is handled when the new ca
 */
 function getDefaultCardHtml() {
     return `
-    <img src="../../ui_assets/inverted_assets/background.svg" style="background-color: 1ac095;" class="background_svg" id="background_svg" alt="Background">
+    <img src="static/inverted_ui_assets/background.svg" style="background-color: 1ac095;" class="background_svg" id="background_svg" alt="Background">
                     
     <!--Data card left-->
     <div class="data_card_left" id="left">
         <div class="name_field" id="name_field">
-            <img src="../../ui_assets/inverted_assets/name_field.svg" style="background-color: 1ac095;" class="name_field_svg" id="name_field_svg" alt="Name Field">
+            <img src="static/inverted_ui_assets/name_field.svg" style="background-color: 1ac095;" class="name_field_svg" id="name_field_svg" alt="Name Field">
             <p id="device_name_text">This is a test</p>
         </div>
                 
         <div class="battery_icon" id="battery_icon">
-            <img src="../../ui_assets/inverted_assets/battery_icon.svg" style="background-color: 1ac095;" class="battery_icon_svg" id="battery_icon" alt="Battery Icon">
+            <img src="static/inverted_ui_assets/battery_icon.svg" style="background-color: 1ac095;" class="battery_icon_svg" id="battery_icon" alt="Battery Icon">
         </div>
         
         <div class="storage_icon" id="storage_icon">
-            <img src="../../ui_assets/inverted_assets/storage_icon.svg" style="background-color: 1ac095;" class="storage_icon_svg" id="storage_icon" alt="Storage Icon">
+            <img src="static/inverted_ui_assets/storage_icon.svg" style="background-color: 1ac095;" class="storage_icon_svg" id="storage_icon" alt="Storage Icon">
         </div>
         
         <div class="fan_icon" id="fan_icon">
-            <img src="../../ui_assets/inverted_assets/fan_icon.svg" style="background-color: 1ac095;" class="fan_icon_svg" id="fan_icon" alt="Fan Icon">
+            <img src="static/inverted_ui_assets/fan_icon.svg" style="background-color: 1ac095;" class="fan_icon_svg" id="fan_icon" alt="Fan Icon">
         </div>
         
         <div class="gpu_icon" id="gpu_icon">
-            <img src="../../ui_assets/inverted_assets/gpu_icon.svg" style="background-color: 1ac095;" class="gpu_icon_svg" id="gpu_icon" alt="GPU Icon">
+            <img src="static/inverted_ui_assets/gpu_icon.svg" style="background-color: 1ac095;" class="gpu_icon_svg" id="gpu_icon" alt="GPU Icon">
         </div>
         
         <div class="ram_icon" id="ram_icon">
-            <img src="../../ui_assets/inverted_assets/ram_icon.svg" style="background-color: 1ac095;" class="ram_icon_svg" id="ram_icon" alt="RAM Icon">
+            <img src="static/inverted_ui_assets/ram_icon.svg" style="background-color: 1ac095;" class="ram_icon_svg" id="ram_icon" alt="RAM Icon">
         </div>
         
         <div class="cpu_icon" id="cpu_icon">
-            <img src="../../ui_assets/inverted_assets/cpu_icon.svg" style="background-color: 1ac095;" class="cpu_icon_svg" id="cpu_icon" alt="CPU Icon">
+            <img src="static/inverted_ui_assets/cpu_icon.svg" style="background-color: 1ac095;" class="cpu_icon_svg" id="cpu_icon" alt="CPU Icon">
         </div>    
         <!--Data card left-->
     </div>
@@ -532,32 +533,32 @@ function getDefaultCardHtml() {
     <!--Data card right-->
     <div class="data_card_right" id="right">
         <div class="battery_data_field" id="battery_field">
-            <img src="../../ui_assets/inverted_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="uptime_field_svg" alt="Uptime Field">
+            <img src="static/inverted_ui_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="uptime_field_svg" alt="Uptime Field">
             <p id="battery_text" class="data_field_paragraph">This is a test</p>
         </div>
 
         <div class="storage_data_field" id="storage_field">
-            <img src="../../ui_assets/inverted_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="storage_field_svg" alt="Storage Field">
+            <img src="static/inverted_ui_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="storage_field_svg" alt="Storage Field">
             <p id="storage_text" class="data_field_paragraph">This is a test</p>
         </div>
 
         <div class="fan_data_field" id="fan_field">
-            <img src="../../ui_assets/inverted_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="fan_field_svg" alt="Fan Field">
+            <img src="static/inverted_ui_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="fan_field_svg" alt="Fan Field">
             <p id="fan_text" class="data_field_paragraph">This is a test</p>
         </div>
 
         <div class="gpu_data_field" id="gpu_field">
-            <img src="../../ui_assets/inverted_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="gpu_field_svg" alt="GPU Field">
+            <img src="static/inverted_ui_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="gpu_field_svg" alt="GPU Field">
             <p id="gpu_text" class="data_field_paragraph">This is a test</p>
         </div>
 
         <div class="ram_data_field" id="ram_field">
-            <img src="../../ui_assets/inverted_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="ram_field_svg" alt="RAM Field">
+            <img src="static/inverted_ui_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="ram_field_svg" alt="RAM Field">
             <p id="ram_text" class="data_field_paragraph">This is a test</p>
         </div>
 
         <div class="cpu_data_field" id="cpu_field">
-            <img src="../../ui_assets/inverted_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="cpu_field_svg" alt="CPU Field">
+            <img src="static/inverted_ui_assets/data_field.svg" style="background-color: 1ac095;" class="data_field_svg" id="cpu_field_svg" alt="CPU Field">
             <p id="cpu_text" class="data_field_paragraph">This is a test</p>
         </div>
 

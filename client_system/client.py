@@ -88,14 +88,14 @@ def initialise_apihandler():
 
 
     ### set ip address and host
-    print("Enter server address and port (default localhost:8081)")
+    print("Enter server address and port (default localhost:8080)")
 
     user_input = str(input())
     
     if user_input != "":
         ip_address = user_input
     else:
-        ip_address = 'localhost:8081'
+        ip_address = 'localhost:8080'
 
 
     ### set debug mode
