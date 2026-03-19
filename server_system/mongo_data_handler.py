@@ -1,6 +1,7 @@
 import mongo_helper
 from time import sleep, time
 from random import randint
+import json
 
 id_register_time = 10
 data_store_time = 60
@@ -48,7 +49,6 @@ def update_client_data(client_data) -> None:
         return None
     
     client_data = mongo_helper.sanitise_client_data(client_data)
-    print(client_data)
     
     client_id = client_data.get("client_id")
     
@@ -106,7 +106,7 @@ def update_client_data(client_data) -> None:
 
 
 #Remove clients and their data based on how old their last update is. 
-def clear_data() -> None:
+def clear_client_data() -> None:
     collection = mongo_helper.get_collection(mongo_helper.client_id_collection_name)
     if collection == None:
         print(f"Failed to get reference to ID collection. no data deleted")
@@ -143,11 +143,31 @@ def clear_data() -> None:
 
     #Remove data if the last update is older than the store time.
     for entry in result:
-        print(entry)
         if entry.get("last_update") < int(time()) - id_register_time:
             entry_id = entry.get("client_id")
             removed_ids.append(entry_id)
             collection.delete_one({"client_id": entry_id})
             print(f"Removed the data of {entry_id} from the data collection")
+
+
+#Get client data from MongoDB, assemble a master JSON file, and return it.
+def fetch_client_data() -> json:
+    print("Fetching data")
+    collection = mongo_helper.get_collection(mongo_helper.client_data_collection_name)
+    if collection == None:
+        print(f"Failed to get reference to data collection. no data fetched")
+        return None
+    
+    data = []
+    result = collection.find(
+        {},
+        {"_id": 0}
+    )
+    for client_data in result:
+        data.append(client_data)
+    data = json.dumps(data)
+    print(data)
+    return data
+
 
     
