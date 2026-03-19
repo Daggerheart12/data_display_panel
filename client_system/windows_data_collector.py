@@ -92,7 +92,7 @@ class WindowsDataCollector():
 			return self.device_name
 		
 		try:
-			return platform_name()
+			return str(platform_name())
 		except:
 			return "No Data"
 	
@@ -100,7 +100,7 @@ class WindowsDataCollector():
 	def get_ram_data(self):
 		try:
 			ram = psutil_memory()
-			return [ram.used, ram.total]
+			return [int(ram.used), int(ram.total)]
 		except:
 			return ["No Data", "No Data"]
 
@@ -108,9 +108,8 @@ class WindowsDataCollector():
 	def get_battery_data(self):
 		try:
 			battery = psutil_battery()
-			print(battery.power_plugged)
 			
-			return [battery.percent, battery.power_plugged]
+			return [int(battery.percent), bool(battery.power_plugged)]
 		except:
 			return ["No Data", "No Data"]
 
@@ -118,7 +117,7 @@ class WindowsDataCollector():
 	def get_storage_data(self): 
 		try:
 			disk = psutil_disk("/")
-			return [disk.used, disk.total]
+			return [int(disk.used), int(disk.total)]
 		except:
 			return ["No Data", "No Data"]
 
@@ -184,7 +183,21 @@ class WindowsDataCollector():
 			except:
 				self.print_if_debug(f"Failed to read the sensors of {hardware.Name}")
 
-		target_data = [self.s_h_data(cpu_temp), self.s_h_data(cpu_load), self.s_h_data(gpu_temp), self.s_h_data(gpu_load)]
+		target_data = [
+			self.s_h_data(cpu_temp), 
+			self.s_h_data(cpu_load), 
+			self.s_h_data(gpu_temp), 
+			self.s_h_data(gpu_load)
+			]
+		
+		#Convert the lot to ints or strings to give the server stuff that isn't null.
+		for i in range(len(target_data)):
+			try:
+				target_data[i] = int(target_data[i])
+			except:
+				target_data[i] = "No Data"
+
+
 		computer.Close()
 		return target_data
 	
@@ -203,7 +216,7 @@ class WindowsDataCollector():
 		"battery_status": battery_data[1],
 		"disk_space_used": storage_data[0],
 		"total_disk_space": storage_data[1],
-		"fan_speed": "Fan Speed",
+		"fan_speed": "No Data",
 		"gpu_load": hardware_monitor_data[3],
 		"gpu_temp": hardware_monitor_data[2],
 		"ram_load": ram_data[0],

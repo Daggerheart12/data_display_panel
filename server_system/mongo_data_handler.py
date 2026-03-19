@@ -41,11 +41,14 @@ def generate_new_id() -> int | None:
 #Update client document with a new "last-update" time and "total_updates" counter.
 #This function assumes that the ID is already in the list.
 #There should be no situation were there is an unregistered client.
-def update_client(client_data) -> None:
+def update_client_data(client_data) -> None:
     collection = mongo_helper.get_collection(mongo_helper.client_id_collection_name)
     if collection == None:
         print(f"Failed to get reference to collection. ID not created")
         return None
+    
+    client_data = mongo_helper.sanitise_client_data(client_data)
+    print(client_data)
     
     client_id = client_data.get("client_id")
     
@@ -66,28 +69,41 @@ def update_client(client_data) -> None:
         print(f"Failed to get reference to data collection. no data deleted")
         return None
     
-    collection.update_one(
-        {"client_id": client_id},
-        {
-            "$set": {"last_update": int(time())},
-            "$set": {"battery_charge": client_data.get("battery_charge")},
-            "$set": {"battery_status": client_data.get("battery_status")},
 
-            "$set": {"disk_space_used": client_data.get("disk_space_used")},
-            "$set": {"total_disk_space": client_data.get("total_disk_space")},
+    #mongo_helper.debug_client_data(client_data)
+    
+    try:
+        collection.update_one(
+            {"client_id": client_id},
+            {
+                "$inc": {"total_updates" : 1},
+                "$set": {
+                    "last_update": int(time()),
 
-            "$set": {"fan_speed": client_data.get("fan_speed")},
+                    "device_name": client_data.get("device_name"),
 
-            "$set": {"gpu_load": client_data.get("gpu_load")},
-            "$set": {"gpu_temp": client_data.get("gpu_temp")},
+                    "battery_charge": client_data.get("battery_charge"),
+                    "battery_status": client_data.get("battery_status"),
 
-            "$set": {"ram_load": client_data.get("ram_load")},
-            "$set": {"total_ram_space": client_data.get("total_ram_space")},
+                    "disk_space_used": client_data.get("disk_space_used"),
+                    "total_disk_space": client_data.get("total_disk_space"),
 
-            "$set": {"cpu_load": client_data.get("cpu_load")},
-            "$set": {"cpu_temp": client_data.get("cpu_temp")}
-        }
-    )
+                    "fan_speed": client_data.get("fan_speed"),
+
+                    "gpu_load": client_data.get("gpu_load"),
+                    "gpu_temp": client_data.get("gpu_temp"),
+
+                    "ram_load": client_data.get("ram_load"),
+                    "total_ram_space": client_data.get("total_ram_space"),
+
+                    "cpu_load": client_data.get("cpu_load"),
+                    "cpu_temp": client_data.get("cpu_temp")
+                }
+
+            })
+    except:
+        print(f"Failed to update client {client_id}")
+
 
 #Remove clients and their data based on how old their last update is. 
 def clear_data() -> None:

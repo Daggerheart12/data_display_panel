@@ -24,7 +24,8 @@ def receive_client_data():
         return "Bad Request", 400
     
     #handle_new_data(new_data)
-    update_client(json.loads(new_data))
+    print("Updating data")
+    update_client_data(json.loads(new_data))
     return "Data received", 200
 
 
