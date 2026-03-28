@@ -110,7 +110,7 @@ function updateCardData(card_data) {
                     
                     //GPU icon.
                     icon = child_element.querySelector("#gpu_icon").children[0];
-                    icon.style.backgroundColor = dataToColour([required_data.gpu_load, required_data.gpu_load], "gpu_icon");
+                    icon.style.backgroundColor = dataToColour([required_data.gpu_load, required_data.gpu_temp], "gpu_icon");
                     
                     //RAM icon.
                     icon = child_element.querySelector("#ram_icon").children[0];
@@ -236,16 +236,10 @@ function dataToColour(data, current_element) {
 
         case "gpu_icon":            //data = [gpu_load, gpu_temp]
             if (data[0] == null || data[1] == null) { return white; }
-            if (data[0] > system_load.red || data[1] > system_temp.red) {
-                reds++;
-                return red;
-            }
-            if (data[0] > system_load.yellow || data[1] > system_temp.yellow) {
-                yellows++;
-                return yellow;
-            }
+            if (data[0] > system_load.red || data[1] > system_temp.red) { reds++; return yellow; }
+            if (data[0] > system_load.yellow || data[1] > system_temp.yellow) { yellows++; return yellow; }
             greens++;
-            return green;
+            return green; 
 
         case "ram_icon":            //data = [ram_load, total_ram_space]
             if (data[0] == null || data[1] == null) { return white; }
@@ -258,16 +252,10 @@ function dataToColour(data, current_element) {
 
         case "cpu_icon":            //data = [cpu_load, cpu_temp]
             if (data[0] == null || data[1] == null) { return white; }
-            if (data[0] > system_load.red || data[1] > system_temp.red) {
-                reds++;
-                return red;
-            }
-            if (data[0] > system_load.yellow || data[1] > system_temp.yellow) {
-                yellows++;
-                return yellow;
-            }
+            if (data[0] > system_load.red || data[1] > system_temp.red) { reds++; return yellow; }
+            if (data[0] > system_load.yellow || data[1] > system_temp.yellow) { yellows++; return yellow; }
             greens++;
-            return green;
+            return green; 
 
         //Right side.
         case "battery_data_field":  //data = [battery_charge, battery_status]

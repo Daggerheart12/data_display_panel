@@ -42,19 +42,19 @@ class WindowsDataCollector():
 		#Hardware sensor targets
 		#Add new lists with the following content: ["Type (see existing)", "Harware Name", "Sensor Name"]
 		self.cpu_temp_targets = [
-			["c_temp", "Intel ", "Core Average"]	#Space after name to avoid needing to handle Intel graphics systems
+			["c_temp", "Intel ", "Core Average", "Temperature"]	#Space after name to avoid needing to handle Intel graphics systems
 		]
 
 		self.cpu_load_targets = [
-			["c_load", "Intel ", "CPU Total"]
+			["c_load", "Intel ", "CPU Total", "Load"]
 		]
 
 		self.gpu_temp_targets = [
-			["g_temp", "NVIDIA", "GPU Core"]
+			["g_temp", "NVIDIA", "GPU Core", "Temperature"]
 		]
 
 		self.gpu_load_targets = [
-			["g_load", "NVIDIA", "Test"]
+			["g_load", "NVIDIA", "GPU Core", "Load"]
 		]
 
 		self.hardware_targets = self.merge_target_dictionaries()
@@ -64,7 +64,7 @@ class WindowsDataCollector():
 	###
 
 	### Merge all of the hardware target options into a single list
-	def merge_target_dictionaries(self) -> dict[str, str]:
+	def merge_target_dictionaries(self) -> dict[str, str, str]:
 		hardware_targets = []
 		
 		for target in self.cpu_temp_targets:
@@ -143,7 +143,7 @@ class WindowsDataCollector():
 
 				if hardware_target_name in hardware.Name:
 					valid_hardware_target = True
-					valid_sensor_targets.append([targets[index][0], targets[index][2]])
+					valid_sensor_targets.append([targets[index][0], targets[index][2], targets[index][3]])
 			
 			#If this is a valid hardware target, find the sensor target
 			if not valid_hardware_target:						
@@ -156,7 +156,7 @@ class WindowsDataCollector():
 					#print(sensor.Name)
 					for target in valid_sensor_targets:
 						#print(f"\t{target[1]}")
-						if sensor.Name == target[1]:
+						if sensor.Name == target[1] and str(sensor.SensorType) == target[2]:
 							sensor_value = str(sensor.Value)
 							#print(f"\t\tFound target {target[1]}")
 
@@ -190,13 +190,13 @@ class WindowsDataCollector():
 			self.s_h_data(gpu_load)
 			]
 		
+		
 		#Convert the lot to ints or strings to give the server stuff that isn't null.
 		for i in range(len(target_data)):
 			try:
-				target_data[i] = int(target_data[i])
+				target_data[i] = int(float(target_data[i]))
 			except:
 				target_data[i] = "No Data"
-
 
 		computer.Close()
 		return target_data
@@ -226,7 +226,7 @@ class WindowsDataCollector():
 		}
 	
 		data = json_dumps(data)
-		self.print_if_debug(data)
+		#self.print_if_debug(data)
 		return data
 
 	###

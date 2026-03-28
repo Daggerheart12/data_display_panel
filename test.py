@@ -25,12 +25,16 @@ def read():
         #    continue
 
         print(f"Hardware: {hardware.Name}, {hardware.HardwareType}")
-        for subhardware  in hardware.SubHardware:
-            print(f"\tSubhardware: {subhardware.Name}")
-            for sensor in subhardware.Sensors:
-                print(f"\t\tSensor: {sensor.Name}, {sensor.SensorType}, value: {sensor.Value}")
+      #  for subhardware  in hardware.SubHardware:
+       #     print(f"\tSubhardware: {subhardware.Name}")
+       #     for sensor in subhardware.Sensors:
+       #         print(f"\t\tSensor: {sensor.Name}, {sensor.SensorType}, value: {sensor.Value}")
         for sensor in hardware.Sensors:
                 print(f"\tSensor: {sensor.Name}, {sensor.SensorType}, value: {sensor.Value}")
+                x = str(sensor.SensorType)
+                print(type(x))
+
+                
 
     computer.Close()
 
